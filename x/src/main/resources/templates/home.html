@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" th:href="@{/styles.css}">
+</head>
+<body>
+
+<header>
+    <nav>
+        <ul>
+            <li><a href="/home">Home</a></li>
+            <li><a href="/profile">Profile</a></li>
+            <li><a href="/logout" th:href="@{/logout}">Logout</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <h1>Welcome to QuizApp, <span th:text="${#authentication.name}">User</span>!</h1>
+    <p>This is your home page after a successful login.</p>
+
+    <div class="content">
+        <h2>Your Progress:</h2>
+        <p>Here you can see your learning progress, quizzes, and more!</p>
+
