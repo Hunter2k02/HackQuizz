@@ -17,26 +17,28 @@ public class SecurityConfig {
         return http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/HackQuizz/login", "/HackQuizz/login-error", "/HackQuizz/logout", "/HackQuizz/passwordreminder").permitAll()
                         .requestMatchers("login.css").permitAll()
                         .anyRequest().authenticated()
 
                 )
                 .formLogin(form -> form
-                        .loginPage("/login")
-                        .loginProcessingUrl("/login")
-                        .defaultSuccessUrl("/home")
-                        .failureUrl("/login?error")
+                        .loginPage("/HackQuizz/login")
+                        .loginProcessingUrl("/HackQuizz/login")
+                        .defaultSuccessUrl("/HackQuizz/home")
+                        .failureUrl("/HackQuizz/login?error")
                         .permitAll()
                 )
                 .logout(httpSecurityLogoutConfigurer -> httpSecurityLogoutConfigurer
-                        .logoutUrl("/logout")
-                        .logoutSuccessUrl("/login?logout")
+                        .logoutUrl("/HackQuizz/logout")
+                        .logoutSuccessUrl("/HackQuizz/login?logout")
                         .invalidateHttpSession(true)
                         .deleteCookies("JSESSIONID")
                         .permitAll()
                 )
                 .build();
     }
+
     @Bean
     UserDetailsService userDetailsService() {
         var user = User.withUsername("admin")

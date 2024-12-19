@@ -43,7 +43,7 @@ input {
 }
 
 button {
-    width: 100%;
+    width: 110%;
     padding: 12px;
     background-color: #4CAF50;
     color: white;
@@ -77,3 +77,13 @@ button:hover {
 .footer a:hover {
     text-decoration: underline;
 }
+.links, label, a{
+    white-space: nowrap;
+    display: flex;
+    flex-direction: row;
+}
+label{
+    padding-left:10px;
+    padding-right: 5px;
+}
+
