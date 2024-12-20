@@ -18,8 +18,8 @@ public class Users {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int id;
-    private String name;
-    private int age;
     private String username;
     private String password;
+    private String email;
+    private String role;
 }

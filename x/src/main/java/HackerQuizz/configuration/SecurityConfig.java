@@ -17,7 +17,7 @@ public class SecurityConfig {
         return http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/HackQuizz/login", "/HackQuizz/login-error", "/HackQuizz/logout", "/HackQuizz/passwordreminder").permitAll()
+                        .requestMatchers("/HackQuizz/login", "/HackQuizz/login-error", "/HackQuizz/logout", "/HackQuizz/passwordreminder", "/HackQuizz/register").permitAll()
                         .requestMatchers("login.css").permitAll()
                         .anyRequest().authenticated()
 

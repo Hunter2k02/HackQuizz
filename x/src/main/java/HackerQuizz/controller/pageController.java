@@ -19,4 +19,8 @@ public class pageController {
     public String passwordreminder() {
         return "passwordreminder";
     }
+    @GetMapping("/register")
+    public String register() {
+        return "register";
+    }
 }
