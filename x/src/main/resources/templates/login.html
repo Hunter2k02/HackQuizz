@@ -9,11 +9,12 @@
     <link th:href="@{/login.css}" rel="stylesheet" />
 </head>
 <body>
-<p class="content">
-    <p th:if="${param.error}">
-        Invalid username or password. Please try again.
-    </p>
+
     <form class="login-form" method="post" th:action="@{/HackQuizz/login}">
+        <p class="content">
+        <p th:if="${param.error}">
+            Invalid username or password. Please try again.
+        </p>
         <h2>Please sign in</h2>
 
 

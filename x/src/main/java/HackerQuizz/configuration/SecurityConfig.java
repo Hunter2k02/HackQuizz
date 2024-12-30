@@ -1,23 +1,36 @@
 package HackerQuizz.configuration;
 
+import HackerQuizz.service.CustomUserDetailsService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
-public class SecurityConfig {
+public class SecurityConfig{
+
+    private final CustomUserDetailsService customUserDetailsService;
+
+    public SecurityConfig(CustomUserDetailsService customUserDetailsService) {
+        this.customUserDetailsService = customUserDetailsService;
+    }
 
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/HackQuizz/login", "/HackQuizz/login-error", "/HackQuizz/logout", "/HackQuizz/passwordreminder", "/HackQuizz/register").permitAll()
+                        .requestMatchers(
+                                "/HackQuizz/login", "/HackQuizz/login-error"
+                                , "/HackQuizz/logout", "/HackQuizz/passwordreminder"
+                                , "/HackQuizz/register", "/HackQuizz/register").permitAll()
                         .requestMatchers("login.css").permitAll()
                         .anyRequest().authenticated()
 
@@ -40,10 +53,14 @@ public class SecurityConfig {
     }
 
     @Bean
-    UserDetailsService userDetailsService() {
-        var user = User.withUsername("admin")
-                .password("{noop}admin")
-                .build();
-        return new InMemoryUserDetailsManager(user);
+    public AuthenticationProvider authenticationProvider() {
+        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
+        provider.setUserDetailsService(customUserDetailsService);
+        provider.setPasswordEncoder(passwordEncoder());
+        return provider;
+    }
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
     }
 }

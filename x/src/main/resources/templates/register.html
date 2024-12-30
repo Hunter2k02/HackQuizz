@@ -13,30 +13,45 @@
 <p th:if="${param.error}">
     Invalid username or password. Please try again.
 </p>
-<form class="login-form" method="post" th:action="@{/HackQuizz/login}">
+<form class="login-form" method="post" th:action="@{/HackQuizz/register}" th:object="${user}">
     <h2>Please sign in</h2>
-    <p>
-        <label for="email">Email</label>
-        <input type="text" id="email" name="email" placeholder="Email" required autofocus>
-    </p>
 
     <p>
         <label for="username">Username</label>
         <input type="text" id="username" name="username" placeholder="Username" required autofocus>
     </p>
+
+    <p>
+        <label for="email">Email</label>
+        <input type="text" id="email" name="email" placeholder="Email" required autofocus>
+    </p>
     <p>
         <label for="password">Password</label>
         <input type="password" id="password" name="password" placeholder="Password" required>
+    </p>
+    <p>
+        <label for="confirmPassword">Password</label>
+        <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm password" required>
     </p>
     <p class="links">
         <label>Sign in</label>
         <a href="/HackQuizz/login">Click here!</a>
     </p>
-    <button type="submit" class="primary">Sign in</button>
+    <button type="submit" class="primary">Register</button>
 </form>
 
 
+<script>
+    document.getElementById("login-form").addEventListener("submit", function(event) {
+        const password = document.getElementById("password").value;
+        const confirmPassword = document.getElementById("confirmPassword").value;
 
-</div>
+        if (password !== confirmPassword) {
+            event.preventDefault();
+            document.getElementById("errorMessage").textContent = "Passwords do not match!";
+        }
+    });
+</script>
+
 </body>
 </html>
