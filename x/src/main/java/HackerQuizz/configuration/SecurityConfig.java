@@ -38,7 +38,7 @@ public class SecurityConfig{
                 .formLogin(form -> form
                         .loginPage("/HackQuizz/login")
                         .loginProcessingUrl("/HackQuizz/login")
-                        .defaultSuccessUrl("/HackQuizz/home")
+                        .defaultSuccessUrl("/HackQuizz/home", true)
                         .failureUrl("/HackQuizz/login?error")
                         .permitAll()
                 )

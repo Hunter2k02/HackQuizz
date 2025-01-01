@@ -7,7 +7,6 @@ import jakarta.validation.constraints.Size;
 import lombok.*;
 
 
-@NoArgsConstructor
 @Data
 @PasswordMatch
 public class UserRegisterDTO {

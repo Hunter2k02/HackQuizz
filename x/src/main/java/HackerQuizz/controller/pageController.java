@@ -1,8 +1,8 @@
 package HackerQuizz.controller;
 
 import HackerQuizz.dto.UserRegisterDTO;
-import HackerQuizz.model.AppUser;
-import HackerQuizz.repository.UserRepository;
+import HackerQuizz.model.Progress;
+import HackerQuizz.service.ProgressService;
 import HackerQuizz.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
@@ -13,16 +13,25 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @RequestMapping("/HackQuizz")
 @Controller
 public class PageController {
     private final UserService userService;
-    public PageController(UserService userService) {
+    private final ProgressService progressService;
+
+    public PageController(UserService userService, ProgressService progressService) {
         this.userService = userService;
+        this.progressService = progressService;
     }
 
     @GetMapping("/home")
-    public String home() {
+    public String home(Model model) {
+        List<Progress> listOfQuizzes = progressService.getProgresses(progressService.getCurrentUser());
+        System.out.println(listOfQuizzes);
+        model.addAttribute("listOfQuizzes", listOfQuizzes);
         return "home";
     }
     @GetMapping({"/", "/login"})

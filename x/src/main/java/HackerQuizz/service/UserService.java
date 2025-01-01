@@ -3,6 +3,7 @@ package HackerQuizz.service;
 import HackerQuizz.dto.UserRegisterDTO;
 import HackerQuizz.model.AppUser;
 import HackerQuizz.repository.UserRepository;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -30,5 +31,6 @@ public class UserService {
     public Optional<AppUser> findByUsername(String username){
         return userRepository.findByUsername(username);
     }
+
 
 }

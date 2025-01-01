@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
+    <title>HackQuizz - Home</title>
     <link rel="stylesheet" th:href="@{/home.css}">
 </head>
 <body>
@@ -19,14 +19,12 @@
 </header>
 
 <main>
-    <h1>Welcome to QuizApp, <span th:text="${#authentication.name}">User</span>!</h1>
-    <p>This is your home page after a successful login.</p>
-
-    <div class="content">
-        <h2>Your Progress:</h2>
-        <p>Here you can see your learning progress, quizzes, and more!</p>
-    </div>
+    <h2>Your Progress</h2>
 </main>
+<div class="quiz-container">
+    <div class="quiz"></div>
+
+</div>
 
 <footer>
     <p>QuizApp © 2024</p>
