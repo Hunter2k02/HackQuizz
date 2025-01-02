@@ -13,13 +13,6 @@ public class AppUser {
     private String email;
     private String role;
 
-    public AppUser(String username, String password, String email, String role) {
-        this.username = username;
-        this.password = password;
-        this.email = email;
-        this.role = "role";
-    }
-
     public AppUser() {
     }
 
@@ -69,4 +62,5 @@ public class AppUser {
                 ", role='" + role + '\'' +
                 '}';
     }
+
 }

@@ -1,6 +1,6 @@
 package HackerQuizz.controller;
 
-import HackerQuizz.service.ProgressService;
+import HackerQuizz.service.QuizService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -8,5 +8,5 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/HackerQuizz/Quiz")
 public class QuizController {
-    private ProgressService progressService;
+    private QuizService quizService;
 }

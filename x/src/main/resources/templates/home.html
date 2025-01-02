@@ -19,10 +19,15 @@
 </header>
 
 <main>
-    <h2>Your Progress</h2>
+
+    <h1 th:text="'Welcome, ' + ${currentUser.getUsername()}"> </h1>
+
+
+    <p>Your Quizzes</p>
 </main>
 <div class="quiz-container">
-    <div class="quiz"></div>
+    <div class="quiz">
+    </div>
 
 </div>
 

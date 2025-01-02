@@ -3,17 +3,12 @@ package HackerQuizz.service;
 import HackerQuizz.model.AppUser;
 import HackerQuizz.model.CustomUserDetails;
 import HackerQuizz.repository.UserRepository;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.util.Collection;
-import java.util.HashSet;
 import java.util.Optional;
-import java.util.Set;
 
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
@@ -34,10 +29,5 @@ public class CustomUserDetailsService implements UserDetailsService {
         return new CustomUserDetails(user);
 
 
-    }
-    private Collection<? extends GrantedAuthority> getAuthorities(AppUser user) {
-        Set<GrantedAuthority> authorities = new HashSet<>();
-        authorities.add(new SimpleGrantedAuthority(user.getRole()));
-        return authorities;
     }
 }

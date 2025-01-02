@@ -7,63 +7,36 @@ public class Progress {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    private String quizName;
-    private int quizNumber;
-    private int completedModules;
-    private int totalModules;
-
-    @OneToOne
-    @JoinColumn(name="id")
+    private String generalQuizTopic;
+    private int totalNumberOfModules;
+    private int completedNumberOfModules;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
     private AppUser user;
-
-    public Progress(String quizName, int quizNumber, int completedModules, int totalModules, AppUser user) {
-        this.quizName = quizName;
-        this.quizNumber = quizNumber;
-        this.completedModules = completedModules;
-        this.totalModules = totalModules;
-        this.user = user;
-    }
     public Progress() {}
 
-
-    public void setQuizName(String quizName) {
-        this.quizName = quizName;
+    public String getGeneralQuizTopic() {
+        return generalQuizTopic;
     }
 
-    public String getQuizName() {
-        return quizName;
+    public void setGeneralQuizTopic(String generalQuizTopic) {
+        this.generalQuizTopic = generalQuizTopic;
     }
 
-    public void setQuizNumber(int quizNumber) {
-        this.quizNumber = quizNumber;
+    public int getTotalNumberOfModules() {
+        return totalNumberOfModules;
     }
 
-    public void setCompletedModules(int completedModules) {
-        this.completedModules = completedModules;
+    public void setTotalNumberOfModules(int totalNumberOfModules) {
+        this.totalNumberOfModules = totalNumberOfModules;
     }
 
-    public void setTotalModules(int totalModules) {
-        this.totalModules = totalModules;
+    public int getCompletedNumberOfModules() {
+        return completedNumberOfModules;
     }
 
-    public void setUser(AppUser user) {
-        this.user = user;
+    public void setCompletedNumberOfModules(int completedNumberOfModules) {
+        this.completedNumberOfModules = completedNumberOfModules;
     }
 
-    public int getQuizNumber() {
-        return quizNumber;
-    }
-
-    public int getCompletedModules() {
-        return completedModules;
-    }
-
-    public int getTotalModules() {
-        return totalModules;
-    }
-
-    public AppUser getUser() {
-        return user;
-    }
 }
