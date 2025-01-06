@@ -39,4 +39,7 @@ public class Progress {
         this.completedNumberOfModules = completedNumberOfModules;
     }
 
+    public AppUser getUser() {
+        return user;
+    }
 }

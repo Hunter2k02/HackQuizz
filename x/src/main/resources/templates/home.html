@@ -17,19 +17,23 @@
         </ul>
     </nav>
 </header>
+<h1 th:text="'Welcome, ' + ${currentUser.getUsername()}"> </h1>
 
 <main>
+    <a th:each="topic : ${listOfTopics}" th:id="'quiz-link-' + ${topic.generalQuizTopic}" class="quiz-link" th:href="@{/HackQuizz/Quiz/{topic}(topic=${topic.generalQuizTopic})}">
+        <div  class="quiz-container">
+            <h2 th:text="${topic.generalQuizTopic}"></h2>
+            <p th:text="'Modules completed: ' + ${topic.completedNumberOfModules}"></p>
+            <p th:text="'Total modules: ' + ${topic.totalNumberOfModules}"></p>
+            <p>Completion Percentage:
+                <span th:text="${#numbers.formatDecimal((topic.completedNumberOfModules * 100) / topic.totalNumberOfModules, 0, 0)}"></span>%
+            </p>
 
-    <h1 th:text="'Welcome, ' + ${currentUser.getUsername()}"> </h1>
 
-
-    <p>Your Quizzes</p>
+        </div>
+    </a>
 </main>
-<div class="quiz-container">
-    <div class="quiz">
-    </div>
 
-</div>
 
 <footer>
     <p>QuizApp © 2024</p>

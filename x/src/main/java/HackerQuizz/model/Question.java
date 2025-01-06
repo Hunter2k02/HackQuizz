@@ -5,9 +5,10 @@ import jakarta.persistence.*;
 @Entity
 public class Question {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String question;
+    private String correctAnswer;
     private String answerA;
     private String answerB;
     private String answerC;
@@ -17,6 +18,14 @@ public class Question {
     private Quiz quiz;
 
     public Question(){}
+
+    public String getCorrectAnswer() {
+        return correctAnswer;
+    }
+
+    public void setCorrectAnswer(String correctAnswer) {
+        this.correctAnswer = correctAnswer;
+    }
 
     public String getQuestion() {
         return question;

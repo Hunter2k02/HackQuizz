@@ -3,7 +3,6 @@ package HackerQuizz.controller;
 import HackerQuizz.dto.UserRegisterDTO;
 import HackerQuizz.model.AppUser;
 import HackerQuizz.model.Progress;
-import HackerQuizz.model.Quiz;
 import HackerQuizz.service.ProgressService;
 import HackerQuizz.service.QuizService;
 import HackerQuizz.service.UserService;
@@ -35,8 +34,7 @@ public class PageController {
     public String home(Model model) {
         AppUser currentUser = userService.getCurrentUser();
         List<Progress> listOfTopics = progressService.getProgresses(currentUser);
-        System.out.println(listOfTopics);
-        model.addAttribute("listOfTopics", null);
+        model.addAttribute("listOfTopics", listOfTopics);
         model.addAttribute("currentUser", currentUser);
         return "home";
     }
@@ -67,5 +65,13 @@ public class PageController {
         }
         userService.save(userDto);
         return "redirect:/login?registered";
+    }
+    @GetMapping("/Quiz/Python")
+    public String python() {
+        return "python";
+    }
+    @GetMapping("/Quiz/Java")
+    public String java() {
+        return "java";
     }
 }
