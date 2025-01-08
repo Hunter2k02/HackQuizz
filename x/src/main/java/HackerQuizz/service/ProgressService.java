@@ -12,11 +12,13 @@ import java.util.List;
 
 @Service
 public class ProgressService {
+    private final UserService userService;
     private ProgressRepository progressRepository;
     private QuizService quizService;
-    public ProgressService(ProgressRepository progressRepository, QuizService quizService) {
+    public ProgressService(ProgressRepository progressRepository, QuizService quizService, UserService userService) {
         this.progressRepository = progressRepository;
         this.quizService = quizService;
+        this.userService = userService;
     }
 
     public List<Progress> getProgresses(AppUser user) {
@@ -29,22 +31,23 @@ public class ProgressService {
         return progressRepository.findByUserAndGeneralQuizTopic(user, name);
     }
     public void updateCompletedModules(Quiz quiz) {
-        System.out.println(quiz.isCompleted());
-        System.out.println(!(quiz.isCompleted()));
-        if(!(quiz.isCompleted())){
-            int completed = 0;
-            quizService.updateCompleted(quiz.getId(), true);
-            long progressId = quiz.getProgress().getId();
-            List<Quiz> quizzes = quizService.getAllQuizWithProgressId(progressId);
-            for(Quiz qu : quizzes){
-                if(qu.isCompleted()){
-                    completed++;
-                }
-            }
-            progressRepository.updateNumberOfCompletedModulesById(progressId, completed+1);
-
+        String progessName = quiz.getQuizName().split(" ")[0];
+        String quizLevel = quiz.getQuizName().split(" ")[1];
+        Progress progress = progressRepository.findByUserAndGeneralQuizTopic(userService.getCurrentUser(), progessName);
+        if(progress.getCompletedNumberOfModules() == 0 && quizLevel.equals("Basics")){
+            progress.setCompletedNumberOfModules(1);
+            progressRepository.save(progress);
+        }else if(progress.getCompletedNumberOfModules() == 1 && quizLevel.equals("Intermediate")){
+            progress.setCompletedNumberOfModules(2);
+            progressRepository.save(progress);
+        }else if(progress.getCompletedNumberOfModules() == 2 && quizLevel.equals("Advanced")){
+            progress.setCompletedNumberOfModules(3);
+            progressRepository.save(progress);
         }
 
 
+    }
+    public void save(Progress progress) {
+        progressRepository.save(progress);
     }
 }

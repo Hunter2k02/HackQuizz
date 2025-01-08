@@ -13,6 +13,13 @@ public class Progress {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private AppUser user;
+    public Progress(String generalQuizTopic, AppUser user) {
+        this.generalQuizTopic = generalQuizTopic;
+        this.totalNumberOfModules = 3;
+        this.completedNumberOfModules = 0;
+        this.user = user;
+
+    }
     public Progress() {}
 
     public Long getId() {

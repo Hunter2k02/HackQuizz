@@ -30,7 +30,12 @@ public class PageController {
         this.quizService = quizService;
         this.progressService = progressService;
     }
-
+    // All users permited
+    @GetMapping({"/", "/login"})
+    public String login() {
+        return "login";
+    }
+    // All users permited default user
     @GetMapping("/home")
     public String home(Model model) {
         AppUser currentUser = userService.getCurrentUser();
@@ -39,18 +44,32 @@ public class PageController {
         model.addAttribute("currentUser", currentUser);
         return "home";
     }
+    // Admin only permited endpoints
     @GetMapping("/admin-home")
-    public String adminHome(Model model) {
+    public String adminHome() {
         return "admin-home";
     }
-    @GetMapping({"/", "/login"})
-    public String login() {
-        return "login";
+    @GetMapping("/user")
+    public String user() {
+        return "user";
     }
-    @GetMapping("/passwordreminder")
-    public String passwordreminder() {
-        return "passwordreminder";
+
+    @GetMapping("/showUsers")
+    public String showUsers(Model model) {
+        List<AppUser> users = userService.getAllUsers();
+        model.addAttribute("users", users);
+        return "showUsers";
     }
+    @GetMapping("/updateUser")
+    public String updateUser(Model model) {
+        return "updateUser";
+    }
+    @GetMapping("/deleteUser")
+    public String deleteUser(Model model) {
+        return "deleteUser";
+    }
+
+
 
 
     @GetMapping("/register")
@@ -71,8 +90,16 @@ public class PageController {
         if (userService.findByUsername(userDto.getUsername()).isPresent()) {
             result.rejectValue("username", null, "An account already exists with this username");
         }
+
+        progressService.save(new Progress("Python", userService.getCurrentUser()));
+        progressService.save(new Progress("Java", userService.getCurrentUser()));
         userService.save(userDto);
         return "redirect:/HackQuizz/register?success=true";
     }
+
+
+
+
+
 
 }

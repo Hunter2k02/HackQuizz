@@ -21,13 +21,9 @@ public class QuizService {
     public Quiz getQuiz(int quizId) {
         return quizRepository.findById(quizId);
     }
-    public void updateCompleted(long quizId, boolean completed) {
-        quizRepository.updateById(quizId, completed);
+    public void save(Quiz quiz) {
+        quizRepository.save(quiz);
     }
-    public List<Quiz> getAllQuizWithProgressId(long progressId) {
-        return quizRepository.findByProgress(progressId);
-    }
-
 
 
 

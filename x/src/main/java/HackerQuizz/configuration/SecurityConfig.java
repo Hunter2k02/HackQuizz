@@ -31,7 +31,10 @@ public class SecurityConfig{
                                 "/HackQuizz/login", "/HackQuizz/login-error"
                                 , "/HackQuizz/logout"
                                 , "/HackQuizz/Quiz/leave-quiz").permitAll()
-                        .requestMatchers("/HackQuizz/register", "/HackQuizz/admin-home").hasRole("ADMIN")
+                        .requestMatchers("/HackQuizz/register", "/HackQuizz/admin-home",
+                                "/HackQuizz/showUsers", "/HackQuizz/updateCredentials",
+                                "/HackQuizz/deleteUser")
+                        .hasRole("ADMIN")
                         .requestMatchers("login.css","generalStyle.css").permitAll()
                         .anyRequest().authenticated()
 
