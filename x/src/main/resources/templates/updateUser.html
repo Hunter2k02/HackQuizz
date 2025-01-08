@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HackQuizz - Admin - User Updating</title>
+
+    <link rel="stylesheet" th:href="@{/generalStyle.css}">
+    <link rel="stylesheet" th:href="@{/login.css}">
+</head>
+<body>
+<header>
+    <nav>
+        <a th:href="@{/HackQuizz/admin-home}">Home</a>
+    </nav>
+</header>
+<main>
+
+
+    <form class="update-form" method="post" th:action="@{/HackQuizz/updateUser}" th:object="${user}" style="margin-top: 100px;">
+
+            <div class="message" th:if="${response != null}" style="text-align: center;" >
+                <p>[[${response}]]</p>
+            </div>
+
+            <h2>User Updating</h2>
+
+            <p>
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" placeholder="Username" required autofocus>
+            </p>
+
+            <p>
+                <label for="email">New Email</label>
+                <input type="text" id="email" name="email" placeholder="Email" required autofocus>
+            </p>
+            <p>
+                <label for="password">New Password</label>
+                <input type="password" id="password" name="password" placeholder="Password" required>
+            </p>
+            <p>
+                <label for="confirmPassword">Confirm New Password</label>
+                <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm password" required>
+            </p>
+            <button type="submit" class="primary">Update</button>
+        </form>
+
+</main>
+<footer>
+    <p>HackQuizz © 2025</p>
+</footer>
+
+</body>
+</html>

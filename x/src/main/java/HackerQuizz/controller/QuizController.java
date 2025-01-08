@@ -86,7 +86,7 @@ public class QuizController {
         model.addAttribute("message", "You haven't completed this quiz. You need to score at least 80% to pass.");
         // Checking if user had passed the quiz; User has to score above 80% to score; If condition is met, the progress is updated;
         if(finalScore > questions.size()*0.8){
-            progressService.updateCompletedModules(quizService.getQuiz((Integer) session.getAttribute("quizId")));
+            progressService.updateCompletedModules(userService.getCurrentUser(), quizService.getQuiz((Integer) session.getAttribute("quizId")));
             model.addAttribute("message", "You have completed this quiz");
         }
 

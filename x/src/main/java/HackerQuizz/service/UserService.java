@@ -3,6 +3,8 @@ package HackerQuizz.service;
 import HackerQuizz.dto.UserRegisterDTO;
 import HackerQuizz.model.AppUser;
 import HackerQuizz.repository.UserRepository;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -16,10 +18,13 @@ import java.util.Optional;
 public class UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    @Lazy
+    private final ProgressService progressService;
 
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, ProgressService progressService) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
+        this.progressService = progressService;
     }
     public void save(UserRegisterDTO dto){
         AppUser user = new AppUser();
@@ -28,7 +33,9 @@ public class UserService {
         user.setEmail(dto.getEmail());
         user.setRole("ROLE_USER");
         userRepository.save(user);
-
+    }
+    public void save(AppUser u){
+        userRepository.save(u);
     }
     public AppUser getCurrentUser(){
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -50,5 +57,15 @@ public class UserService {
     public List<AppUser> getAllUsers(){
         return userRepository.findAll();
     }
+    public AppUser getByUsername(String username){
+        return userRepository.getByUsername(username);
+    }
+    public void delete(AppUser u){
+        // Deleting children first
+        progressService.deleteByUser(u);
+        // Then user itself
+        userRepository.delete(u);
+    }
+
 
 }

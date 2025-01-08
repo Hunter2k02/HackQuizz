@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HackQuizz - Admin - User Deleting</title>
+
+    <link rel="stylesheet" th:href="@{/generalStyle.css}">
+    <link rel="stylesheet" th:href="@{/login.css}">
+</head>
+<body>
+<header>
+    <nav>
+        <a th:href="@{/HackQuizz/admin-home}">Home</a>
+    </nav>
+</header>
+<main>
+
+
+    <form class="update-form" method="post" th:action="@{/HackQuizz/deleteUser}" th:object="${user}" style="margin-top: 100px;">
+
+        <div class="message" th:if="${response != null}" style="text-align: center;" >
+            <p>[[${response}]]</p>
+        </div>
+
+        <h2>User Deleting</h2>
+
+        <p>
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" placeholder="Username" required autofocus>
+        </p>
+
+        <button type="submit" class="primary">Delete</button>
+    </form>
+
+</main>
+<footer>
+    <p>HackQuizz © 2025</p>
+</footer>
+
+</body>
+</html>
