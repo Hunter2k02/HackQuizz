@@ -1,34 +1,33 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+  <link rel="stylesheet" th:href="@{/quiz.css}">
   <title>[[${session.quiz.getQuizName()}]] Question [[${session.currentQuestionNumber + 1}]]</title>
 </head>
 <body>
-<h1></h1>
 
 <form th:action="@{/HackQuizz/Quiz/answer}" method="post">
   <h1 th:text="'Question ' + ${session.currentQuestionNumber + 1} + ':' + ${session.currentQuestion.getQuestion()}"></h1>
-  <div>
-    <label>
+  <div class="radio">
+    <label class="form-control">
       <input type="radio" name="answer" th:value="${session.currentQuestion.getAnswerA()}" required> <span th:text="${session.currentQuestion.getAnswerA()}"></span>
     </label>
   </div>
-  <div>
-    <label>
+  <div class="radio">
+    <label class="form-control">
       <input type="radio" name="answer" th:value="${session.currentQuestion.getAnswerB()}" required> <span th:text="${session.currentQuestion.getAnswerB()}"></span>
     </label>
   </div>
-  <div>
-    <label>
+  <div class="radio">
+    <label class="form-control">
       <input type="radio" name="answer" th:value="${session.currentQuestion.getAnswerC()}" required> <span th:text="${session.currentQuestion.getAnswerC()}"></span>
     </label>
   </div>
-  <div>
-    <label>
+  <div class="radio">
+    <label class="form-control">
       <input type="radio" name="answer" th:value="${session.currentQuestion.getAnswerD()}" required> <span th:text="${session.currentQuestion.getAnswerD()}"></span>
     </label>
   </div>
-  <p>Current score [[${session.score}]]</p>
 
 
   <button type="submit">Submit Answer</button>

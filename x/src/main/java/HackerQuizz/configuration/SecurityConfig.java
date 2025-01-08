@@ -1,5 +1,6 @@
 package HackerQuizz.configuration;
 
+import HackerQuizz.securityComponents.CustomSuccessHandler;
 import HackerQuizz.service.CustomUserDetailsService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,9 +16,10 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfig{
 
     private final CustomUserDetailsService customUserDetailsService;
-
-    public SecurityConfig(CustomUserDetailsService customUserDetailsService) {
+    private final CustomSuccessHandler customSuccessHandler;
+    public SecurityConfig(CustomUserDetailsService customUserDetailsService, CustomSuccessHandler customSuccessHandler) {
         this.customUserDetailsService = customUserDetailsService;
+        this.customSuccessHandler = customSuccessHandler;
     }
 
     @Bean
@@ -27,16 +29,17 @@ public class SecurityConfig{
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(
                                 "/HackQuizz/login", "/HackQuizz/login-error"
-                                , "/HackQuizz/logout", "/HackQuizz/passwordreminder"
-                                , "/HackQuizz/register", "/HackQuizz/register").permitAll()
-                        .requestMatchers("login.css").permitAll()
+                                , "/HackQuizz/logout"
+                                , "/HackQuizz/Quiz/leave-quiz").permitAll()
+                        .requestMatchers("/HackQuizz/register", "/HackQuizz/admin-home").hasRole("ADMIN")
+                        .requestMatchers("login.css","generalStyle.css").permitAll()
                         .anyRequest().authenticated()
 
                 )
                 .formLogin(form -> form
                         .loginPage("/HackQuizz/login")
                         .loginProcessingUrl("/HackQuizz/login")
-                        .defaultSuccessUrl("/HackQuizz/home", true)
+                        .successHandler(customSuccessHandler)
                         .failureUrl("/HackQuizz/login?error")
                         .permitAll()
                 )
@@ -61,4 +64,5 @@ public class SecurityConfig{
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
 }

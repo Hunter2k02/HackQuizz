@@ -4,12 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HackQuizz - Home</title>
-    <link rel="stylesheet" th:href="@{/quiz.css}">
+    <link rel="stylesheet" th:href="@{/language.css}">
+    <link rel="stylesheet" th:href="@{/generalStyle.css}">
 </head>
 <body>
-<a th:href="@{/HackQuizz/Quiz/start/1}">Python Basics</a>
+<header>
+    <nav>
+        <a href="/HackQuizz/home">Home</a>
+        <a href="/profile">Profile</a>
+        <a href="/HackQuizz/logout">Logout</a>
+    </nav>
+</header>
+<p>To unlock further quizzes, please complete the previous ones successfully.</p>
+<p>Please do not leave quiz while answering first question, or you will be log out.</p>
+<main>
+
+    <a  th:href="@{/HackQuizz/Quiz/start/1}">Python Basics</a>
+    <a th:if="${progress.completedNumberOfModules>0}" th:href="@{/HackQuizz/Quiz/start/2}">Python Intermediate</a>
+    <a th:if="${progress.completedNumberOfModules>1}" th:href="@{/HackQuizz/Quiz/start/3}">Python Advanced</a>
+</main>
 <footer>
-    <p>QuizApp © 2024</p>
+    <p>HackQuizz © 2025</p>
 </footer>
 
 </body>

@@ -18,8 +18,6 @@ public class QuestionService {
     }
     public boolean isAnswerCorrect(int quizId, int questionNumber, String answer){
         List<Question> questions = getQuestionsForQuiz(quizId);
-        System.out.println("Given: " + answer);
-        System.out.println("Correct Answer: " + questions.get(questionNumber).getCorrectAnswer());
         return answer.equals(questions.get(questionNumber).getCorrectAnswer());
     }
     public int getTotalNumberOfQuestionsForQuiz(int quizId){

@@ -15,6 +15,10 @@ public class Progress {
     private AppUser user;
     public Progress() {}
 
+    public Long getId() {
+        return id;
+    }
+
     public String getGeneralQuizTopic() {
         return generalQuizTopic;
     }

@@ -7,6 +7,7 @@ import HackerQuizz.service.ProgressService;
 import HackerQuizz.service.QuizService;
 import HackerQuizz.service.UserService;
 import jakarta.validation.Valid;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -38,6 +39,10 @@ public class PageController {
         model.addAttribute("currentUser", currentUser);
         return "home";
     }
+    @GetMapping("/admin-home")
+    public String adminHome(Model model) {
+        return "admin-home";
+    }
     @GetMapping({"/", "/login"})
     public String login() {
         return "login";
@@ -46,11 +51,14 @@ public class PageController {
     public String passwordreminder() {
         return "passwordreminder";
     }
+
+
     @GetMapping("/register")
     public String register(Model model) {
         model.addAttribute("user", new UserRegisterDTO());
         return "register";
     }
+
     @PostMapping("/register")
     public String registerUser(@ModelAttribute("user") @Valid UserRegisterDTO userDto,
                                BindingResult result,
@@ -64,14 +72,7 @@ public class PageController {
             result.rejectValue("username", null, "An account already exists with this username");
         }
         userService.save(userDto);
-        return "redirect:/login?registered";
+        return "redirect:/HackQuizz/register?success=true";
     }
-    @GetMapping("/Quiz/Python")
-    public String python() {
-        return "python";
-    }
-    @GetMapping("/Quiz/Java")
-    public String java() {
-        return "java";
-    }
+
 }

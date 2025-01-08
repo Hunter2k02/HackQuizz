@@ -1,0 +1,24 @@
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #4C5958;
+}
+h1{
+    color:whitesmoke;
+}
+form{
+    background-color: #4C5958;
+}
+form input{
+    background-color: #4C5958;
+}
+.radio{
+    padding: 10px;
+    margin: 5px auto;
+}
+.form-control span {
+    font-size:20px;
+    font-weight: bold;
+    color: whitesmoke;
+}

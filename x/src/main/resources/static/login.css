@@ -1,11 +1,20 @@
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f2f2f2;
-    margin: 0;
+html{
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+}
+body {
+    font-family: Arial, sans-serif;
+    background-color: #4C5958;
+    color:whitesmoke;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 900px;
+    width:1000px;
 }
 
 .login-container {
@@ -20,7 +29,7 @@ h2 {
     text-align: center;
     margin-bottom: 20px;
     font-size: 24px;
-    color: #333;
+    color: whitesmoke;
 }
 
 .input-group {
@@ -30,7 +39,7 @@ h2 {
 label {
     display: block;
     font-size: 14px;
-    color: #555;
+    color: whitesmoke;
 }
 
 input {
@@ -43,47 +52,67 @@ input {
 }
 
 button {
-    width: 110%;
+    width: 105%;
     padding: 12px;
-    background-color: #4CAF50;
+    background-color: #10403B;
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     font-size: 16px;
+    transition: 0.5s;
 }
 
 button:hover {
-    background-color: #45a049;
+    background-color: whitesmoke;
+    color: #10403B;
 }
 
-.error-message {
+.error-message, .alert-success {
     color: red;
     font-size: 12px;
     margin-bottom: 15px;
     text-align: center;
 }
-
-.footer {
-    text-align: center;
-    margin-top: 20px;
+.alert-success{
+    color: #ff00ff;
 }
 
-.footer a {
-    color: #4CAF50;
-    text-decoration: none;
-}
 
-.footer a:hover {
-    text-decoration: underline;
-}
 .links, label, a{
     white-space: nowrap;
     display: flex;
     flex-direction: row;
 }
 label{
-    padding-left:10px;
+    font-size:16px;
     padding-right: 5px;
 }
+
+form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height:400px;
+    width: 400px;
+}
+.error-message p, .alert-success p{
+    font-size: 16px;
+    text-align: center;
+    background-color: #10403B;
+    padding: 20px;
+}
+header{
+    width: 800px;
+}
+footer{
+    margin-top: 250px;
+    padding:0 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+}
+
 

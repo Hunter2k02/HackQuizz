@@ -6,14 +6,22 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <title>Please sign in</title>
+    <link th:href="@{/generalStyle.css}" rel="stylesheet" />
     <link th:href="@{/login.css}" rel="stylesheet" />
+
+
 </head>
 <body>
-<p class="content">
-<p th:if="${param.error}">
-    Invalid username or password. Please try again.
-</p>
+<header>
+    <nav>
+        <a th:href="@{/HackQuizz/admin-home}">Home</a>
+    </nav>
+</header>
 <form class="login-form" method="post" th:action="@{/HackQuizz/register}" th:object="${user}">
+
+    <div class="alert-success" th:if="${param.success}" >
+        <p>Registration successful! New user added.</p>
+    </div>
     <h2>Please sign in</h2>
 
     <p>
@@ -33,10 +41,6 @@
         <label for="confirmPassword">Password</label>
         <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm password" required>
     </p>
-    <p class="links">
-        <label>Sign in</label>
-        <a href="/HackQuizz/login">Click here!</a>
-    </p>
     <button type="submit" class="primary">Register</button>
 </form>
 
@@ -52,6 +56,8 @@
         }
     });
 </script>
-
+<footer>
+    <p>HackQuizz © 2025</p>
+</footer>
 </body>
 </html>

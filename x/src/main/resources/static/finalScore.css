@@ -1,0 +1,26 @@
+body{
+    height: 800px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+body > p{
+    font-size: 20px;
+    margin: 20px 0;
+    text-align: center;
+    color: whitesmoke;
+}
+a{
+    font-size: 20px;
+    text-decoration: none;
+    color: whitesmoke;
+    background-color: #10403B;
+    padding: 20px;
+    border-radius: 25px;
+    transition: 0.5s;
+}
+a:hover{
+    background-color: whitesmoke;
+    color: #10403B;
+}

@@ -5,16 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Please sign in</title>
+    <title>Sign in</title>
+    <link th:href="@{/generalStyle.css}" rel="stylesheet" />
     <link th:href="@{/login.css}" rel="stylesheet" />
 </head>
 <body>
 
-    <form class="login-form" method="post" th:action="@{/HackQuizz/login}">
+    <form class="login-form" method="post" th:action="@{/HackQuizz/login}" style="margin-top:200px;">
         <p class="content">
-        <p th:if="${param.error}">
-            Invalid username or password. Please try again.
-        </p>
+        <div class="error-message">
+            <p th:if="${param.error}">
+                Invalid username or password. Please try again.
+            </p>
+        </div>
         <h2>Please sign in</h2>
 
 
@@ -26,18 +29,14 @@
             <label for="password">Password</label>
             <input type="password" id="password" name="password" placeholder="Password" required>
         </p>
-        <p class="links">
-            <label>Password reset</label>
-            <a href="/HackQuizz/passwordreminder">Click here!</a>
-            <label>Create Account</label>
-            <a href="/HackQuizz/register">Click here!</a>
-        </p>
 
         <button type="submit" class="primary">Sign in</button>
     </form>
 
 
-
+    <footer style="margin-top: 400px;">
+        <p>HackQuizz © 2025</p>
+    </footer>
 
 </body>
 </html>

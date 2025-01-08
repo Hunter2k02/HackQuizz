@@ -5,16 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HackQuizz - Home</title>
     <link rel="stylesheet" th:href="@{/home.css}">
+    <link rel="stylesheet" th:href="@{/generalStyle.css}">
+
 </head>
 <body>
 
 <header>
     <nav>
-        <ul>
-            <li><a href="/home">Home</a></li>
-            <li><a href="/profile">Profile</a></li>
-            <li><a href="/logout" th:href="@{/HackQuizz/logout}">Logout</a></li>
-        </ul>
+        <a href="/HackQuizz/home">Home</a>
+        <a href="/profile">Profile</a>
+        <a href="/logout" th:href="@{/HackQuizz/logout}">Logout</a>
+
     </nav>
 </header>
 <h1 th:text="'Welcome, ' + ${currentUser.getUsername()}"> </h1>
@@ -36,7 +37,7 @@
 
 
 <footer>
-    <p>QuizApp © 2024</p>
+    <p>HackQuizz © 2025</p>
 </footer>
 
 </body>

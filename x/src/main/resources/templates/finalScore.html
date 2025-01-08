@@ -3,9 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Final Score</title>
+    <link rel="stylesheet" th:href="@{/generalStyle.css}">
+    <link rel="stylesheet" th:href="@{/finalScore.css}">
 </head>
 <body>
-<p>Your final score is [[${finalScore}]] </p>
+<p>Your final score is: [[${finalScore}]] </p>
+<p>[[${message}]]</p>
 <a href="/HackQuizz/home">Return to home page</a>
 </body>
 </html>
