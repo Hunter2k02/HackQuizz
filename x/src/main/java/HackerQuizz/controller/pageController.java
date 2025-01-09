@@ -1,9 +1,14 @@
 package HackerQuizz.controller;
 
+import HackerQuizz.dto.QuestionDTO;
 import HackerQuizz.dto.UserRegisterDTO;
 import HackerQuizz.model.AppUser;
 import HackerQuizz.model.Progress;
+import HackerQuizz.model.Question;
+import HackerQuizz.model.Quiz;
 import HackerQuizz.service.ProgressService;
+import HackerQuizz.service.QuestionService;
+import HackerQuizz.service.QuizService;
 import HackerQuizz.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
@@ -11,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -18,13 +24,15 @@ import java.util.Objects;
 @Controller
 public class PageController {
     private final UserService userService;
-
+    private final QuizService quizService;
     private final ProgressService progressService;
+    private final QuestionService questionService;
 
-    public PageController(UserService userService, ProgressService progressService) {
+    public PageController(UserService userService, QuizService quizService, ProgressService progressService, QuestionService questionService) {
         this.userService = userService;
-
+        this.quizService = quizService;
         this.progressService = progressService;
+        this.questionService = questionService;
     }
     // All users permited
     @GetMapping({"/", "/login"})
@@ -45,6 +53,7 @@ public class PageController {
     public String adminHome() {
         return "admin-home";
     }
+    // User related
     @GetMapping("/user")
     public String user() {
         return "user";
@@ -65,7 +74,7 @@ public class PageController {
         model.addAttribute("message", response);
         return "updateUser";
     }
-    @PostMapping("/updateUser")
+    @PutMapping("/updateUser")
     public String updateUser(@ModelAttribute("user") @Valid UserRegisterDTO userDto) {
         if (userService.findByUsername(userDto.getUsername()).isPresent()) {
             AppUser user = new AppUser();
@@ -138,6 +147,94 @@ public class PageController {
         userService.save(userDto);
 
         return "redirect:/HackQuizz/register?success=true";
+    }
+
+
+    // Quiz / Question related
+    @GetMapping("/quizManagement")
+    public String quizManagement(Model model) {
+        return "quizManagement";
+    }
+
+    @GetMapping("/newQuestion")
+    public String newQuestion(@RequestParam(name = "success", required = false) String success, Model model) {
+        model.addAttribute("success", false);
+        model.addAttribute("user", new UserRegisterDTO());
+        if (success != null) {
+            model.addAttribute("success", true);
+        }
+        List<Quiz> options = quizService.getAllQuiz();
+        model.addAttribute("question", new QuestionDTO());
+        List<String> answers = List.of("a", "b", "c", "d");
+        model.addAttribute("options", options);
+        model.addAttribute("answers", answers);
+        model.addAttribute("selectedOption", "");
+        model.addAttribute("selectedAnswer", "");
+
+        return "newQuestion";
+    }
+    @PostMapping("/newQuestion")
+    public String newQuestion(@ModelAttribute("question") QuestionDTO question, BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            System.out.println(result.getAllErrors());
+            model.addAttribute("message", Objects.requireNonNull(result.getFieldError()).getDefaultMessage());
+            return "newQuestion";
+        }
+        if (questionService.getByQuestion(question.getQuestion()) != null){
+            result.rejectValue("question", null, "An question already exists with this content");
+        }
+
+        Question q = new Question();
+        q.setQuiz(quizService.getQuiz(question.getSelectedQuiz()));
+        q.setQuestion(question.getQuestion());
+        q.setAnswerA(question.getAnswerA());
+        q.setAnswerB(question.getAnswerB());
+        q.setAnswerC(question.getAnswerC());
+        q.setAnswerD(question.getAnswerD());
+        switch (question.getAnswerCorrect()){
+            case "a":q.setCorrectAnswer(question.getAnswerA());
+            break;
+            case "b":q.setCorrectAnswer(question.getAnswerB());
+            break;
+            case "c":q.setCorrectAnswer(question.getAnswerC());
+            break;
+            case "d":q.setCorrectAnswer(question.getAnswerD());
+            break;
+        }
+        questionService.save(q);
+
+        return "redirect:newQuestion?success=true";
+    }
+    @GetMapping("/deleteQuestion")
+    public String deleteQuestion(){
+        return "deleteQuestion";
+    }
+    @GetMapping("/deleteQuestion/{response}")
+    public String deleteQuestion(@PathVariable String response, Model model) {
+        model.addAttribute("message", response);
+        return "deleteQuestion";
+    }
+    @PostMapping("/deleteQuestion")
+    public String deleteQuestion(@RequestParam("id") Integer id, Model model)
+    {
+        if (questionService.findById(id).isPresent()){
+            Question q = questionService.findById(id).get();
+
+            questionService.deleteById(q.getId().intValue());
+            String message = "Question deleted successfully";
+            return "redirect:/HackQuizz/deleteQuestion/" + message;
+
+        }else{
+            String message = "There is no question with given id";
+            return "redirect:/HackQuizz/deleteQuestion/" + message;
+        }
+    }
+
+    @GetMapping("/viewAllQuestions")
+    public String viewAllQuestions(Model model) {
+        List<Question> questions = questionService.getAll();
+        model.addAttribute("questions", questions);
+        return "viewAllQuestions";
     }
 
 

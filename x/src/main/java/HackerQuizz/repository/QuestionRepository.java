@@ -1,6 +1,7 @@
 package HackerQuizz.repository;
 
 import HackerQuizz.model.Question;
+import HackerQuizz.model.Quiz;
 import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -14,4 +15,6 @@ public interface QuestionRepository extends JpaRepository<Question, Integer> {
     @Transactional
     @Query("SELECT q FROM Question q WHERE q.quiz.id = :quizId")
     List<Question> findAllByUserId(@Param("quizId") Long id);
+    Question findByQuestion(String question);
+    List<Question> findById(Long id);
 }

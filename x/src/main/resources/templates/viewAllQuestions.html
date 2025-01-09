@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HackQuizz - Questions</title>
+
+    <link rel="stylesheet" th:href="@{/generalStyle.css}">
+    <link rel="stylesheet" th:href="@{/showUsers.css}">
+
+</head>
+<body>
+<header>
+    <nav>
+        <a th:href="@{/HackQuizz/admin-home}">Home</a>
+        <a th:href="@{/HackQuizz/quizManagement}">Back</a>
+    </nav>
+</header>
+<main>
+
+    <h1 style="color:whitesmoke;">All questions</h1>
+    <table>
+        <thead>
+        <th>Question</th>
+        <th>Answer A</th>
+        <th>Answer B</th>
+        <th>Answer C</th>
+        <th>Answer D</th>
+        <th>Correct Answer</th>
+        <th>Quiz</th>
+        </thead>
+        <tbody>
+        <tr th:each="question : ${questions}">
+            <td th:text="${question.getQuestion()}"></td>
+            <td th:text="${question.getAnswerA()}"></td>
+            <td th:text="${question.getAnswerB()}"></td>
+            <td th:text="${question.getAnswerC()}"></td>
+            <td th:text="${question.getAnswerD()}"></td>
+            <td th:text="${question.getCorrectAnswer()}"></td>
+            <td th:text="${question.getQuiz().getQuizName()}"></td>
+        </tr>
+        </tbody>
+
+
+    </table>
+
+
+
+</main>
+
+
+</body>
+</html>

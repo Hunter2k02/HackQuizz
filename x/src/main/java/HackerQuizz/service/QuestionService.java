@@ -5,6 +5,7 @@ import HackerQuizz.repository.QuestionRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class QuestionService {
@@ -22,5 +23,20 @@ public class QuestionService {
     }
     public int getTotalNumberOfQuestionsForQuiz(int quizId){
         return this.getQuestionsForQuiz(quizId).size();
+    }
+    public Question getByQuestion(String question){
+        return questionRepository.findByQuestion(question);
+    }
+    public void save(Question question){
+        questionRepository.save(question);
+    }
+    public List<Question> getAll(){
+        return questionRepository.findAll();
+    }
+    public Optional<Question> findById(int id){
+        return questionRepository.findById(id);
+    }
+    public void deleteById(int id){
+        questionRepository.deleteById(id);
     }
 }

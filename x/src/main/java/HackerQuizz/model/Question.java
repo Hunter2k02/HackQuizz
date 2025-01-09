@@ -19,6 +19,19 @@ public class Question {
 
     public Question(){}
 
+    public Quiz getQuiz() {
+        return quiz;
+    }
+
+    public void setQuiz(Quiz quiz) {
+        this.quiz = quiz;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+
     public String getCorrectAnswer() {
         return correctAnswer;
     }
@@ -65,5 +78,19 @@ public class Question {
 
     public void setAnswerD(String answerD) {
         this.answerD = answerD;
+    }
+
+    @Override
+    public String toString() {
+        return "Question{" +
+                "id=" + id +
+                ", question='" + question + '\'' +
+                ", correctAnswer='" + correctAnswer + '\'' +
+                ", answerA='" + answerA + '\'' +
+                ", answerB='" + answerB + '\'' +
+                ", answerC='" + answerC + '\'' +
+                ", answerD='" + answerD + '\'' +
+                ", quiz=" + quiz +
+                '}';
     }
 }

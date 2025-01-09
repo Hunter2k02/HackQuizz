@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HackQuizz - User Deleting</title>
+    <title>HackQuizz - Question Deleting</title>
 
     <link rel="stylesheet" th:href="@{/generalStyle.css}">
     <link rel="stylesheet" th:href="@{/login.css}">
@@ -12,23 +12,23 @@
 <header>
     <nav>
         <a th:href="@{/HackQuizz/admin-home}">Home</a>
-        <a th:href="@{/HackQuizz/user}">Back</a>
+        <a th:href="@{/HackQuizz/quizManagement}">Back</a>
     </nav>
 </header>
 <main>
 
 
-    <form class="update-form" method="post" th:action="@{/HackQuizz/deleteUser}" th:object="${user}" style="margin-top: 100px;">
+    <form class="update-form" method="post" th:action="@{/HackQuizz/deleteQuestion}" style="margin-top: 100px;">
 
         <div class="message" th:if="${response != null}" style="text-align: center;" >
             <p>[[${response}]]</p>
         </div>
 
-        <h2>User Deleting</h2>
+        <h2>Question Deleting</h2>
 
         <p>
-            <label for="username">Username</label>
-            <input type="text" id="username" name="username" placeholder="Username" required autofocus>
+            <label for="id">Question Id</label>
+            <input type="text" id="id" name="id" placeholder="id"  required autofocus>
         </p>
 
         <button type="submit" class="primary">Delete</button>

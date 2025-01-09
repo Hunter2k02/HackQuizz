@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>New Question</title>
+    <link th:href="@{/generalStyle.css}" rel="stylesheet" />
+    <link th:href="@{/newQuestion.css}" rel="stylesheet" />
+
+</head>
+<body>
+<header>
+    <nav >
+        <a th:href="@{/HackQuizz/admin-home}">Home</a>
+        <a th:href="@{/HackQuizz/quizManagement}">Back</a>
+    </nav>
+</header>
+<main>
+
+
+<form class="login-form" method="post" th:action="@{/HackQuizz/newQuestion}" th:object="${question}" style="margin-top: 40px;display: flex;justify-content: center;align-items: center;">
+    <div  th:if="${message != null}">
+        <p style="text-align: center;">[[${message}]]</p>
+    </div>
+    <div  th:if="${success}">
+        <p style="text-align: center;">User registered successfully</p>
+    </div>
+    <label for="dropdown">Choose an option:</label>
+    <select id="dropdown" name="selectedQuiz" th:field="*{selectedQuiz}">
+        <option value="" disabled selected>Select an option</option>
+        <option th:each="option : ${options}"
+                th:value="${option.getQuizName()}"
+                th:text="${option.getQuizName()}"></option>
+    </select>
+    <p>
+        <label for="question">Content of the question</label>
+        <input type="text" id="question" name="question" placeholder="Question" th:field="*{question}" required autofocus>
+    </p>
+    <p>
+        <label for="a">Answer A</label>
+        <input type="text" id="a" name="a" placeholder="Answer A" th:field="*{answerA}" required autofocus>
+    </p>
+    <p>
+        <label for="b">Answer B</label>
+        <input type="text" id="b" name="b" placeholder="Answer B" th:field="*{answerB}" required autofocus>
+    </p>
+    <p>
+        <label for="c">Answer C</label>
+        <input type="text" id="c" name="c" placeholder="Answer C" th:field="*{answerC}" required autofocus>
+    </p>
+    <p>
+        <label for="d">Answer D</label>
+        <input type="text" id="d" name="d" placeholder="Answer D" th:field="*{answerD}" required autofocus>
+    </p>
+    <label for="dropdown">Choose an option:</label>
+    <select id="correct" name="selectedAnswer" th:field="*{answerCorrect}">
+        <option value="" disabled selected>Select a correct answer to this question</option>
+        <option th:each="answer : ${answers}"
+                th:value="${answer}"
+                th:text="${answer}"></option>
+    </select>
+
+
+    <button type="submit" class="primary">Save</button>
+</form>
+
+</main>
+<footer>
+    <p>HackQuizz © 2025</p>
+</footer>
+
+</body>
+</html>

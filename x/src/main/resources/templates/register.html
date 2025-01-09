@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Please sign in</title>
+    <title>HackQuizz - User Registering</title>
     <link th:href="@{/generalStyle.css}" rel="stylesheet" />
     <link th:href="@{/login.css}" rel="stylesheet" />
 
@@ -15,6 +15,7 @@
 <header>
     <nav >
         <a th:href="@{/HackQuizz/admin-home}">Home</a>
+        <a th:href="@{/HackQuizz/user}">Back</a>
     </nav>
 </header>
 <form class="login-form" method="post" th:action="@{/HackQuizz/register}" th:object="${user}" style="margin-top: 40px">

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Enumeration;
 import java.util.List;
+import java.util.Objects;
 
 
 @RequestMapping("/HackQuizz/Quiz")
@@ -104,16 +105,16 @@ public class QuizController {
         return "finalScore";
     }
 
-    @GetMapping("/Python")
-    public String python(Model model) {
+    @GetMapping("/{language}")
+    public String language(@PathVariable String language, Model model) {
         AppUser currentUser = userService.getCurrentUser();
-        Progress progress = progressService.getProgressByName(currentUser, "Python");
+        Progress progress = progressService.getProgressByName(currentUser, language);
+        List<Quiz> quizzes = quizService.getAllQuiz();
+        quizzes.removeIf(quiz -> !Objects.equals(quiz.getQuizName().split(" ")[0], language));
+        model.addAttribute("language", language);
+        model.addAttribute("quizzes", quizzes);
         model.addAttribute("progress", progress);
-        return "python";
-    }
-    @GetMapping("/Java")
-    public String java() {
-        return "java";
+        return "language";
     }
 
 }

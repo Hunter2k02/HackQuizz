@@ -17,12 +17,14 @@ public class QuizService {
         this.quizRepository = quizRepository;
     }
 
-
     public Quiz getQuiz(int quizId) {
         return quizRepository.findById(quizId);
     }
-    public void save(Quiz quiz) {
-        quizRepository.save(quiz);
+    public Quiz getQuiz(String quizName) {
+        return quizRepository.findByName(quizName);
+    }
+    public List<Quiz> getAllQuiz() {
+        return quizRepository.findAll();
     }
 
 
