@@ -16,9 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 @RequestMapping("/HackQuizz")
 @Controller
@@ -74,10 +72,16 @@ public class PageController {
         model.addAttribute("message", response);
         return "updateUser";
     }
-    @PutMapping("/updateUser")
+    @PostMapping("/updateUser")
     public String updateUser(@ModelAttribute("user") @Valid UserRegisterDTO userDto) {
         if (userService.findByUsername(userDto.getUsername()).isPresent()) {
-            AppUser user = new AppUser();
+            AppUser user = userService.findByUsername(userDto.getUsername()).get();
+            user.setUsername(userDto.getUsername());
+            user.setEmail(userDto.getEmail());
+            user.setPassword(userDto.getPassword());
+
+
+
             userService.save(user);
             String message = "User updated successfully";
             return "redirect:/HackQuizz/updateUser/" + message;
@@ -233,6 +237,7 @@ public class PageController {
     @GetMapping("/viewAllQuestions")
     public String viewAllQuestions(Model model) {
         List<Question> questions = questionService.getAll();
+        Collections.sort(questions);
         model.addAttribute("questions", questions);
         return "viewAllQuestions";
     }

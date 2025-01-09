@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HackQuizz - Questions</title>
-
+    <link rel="icon" href="/images/quiz.ico" sizes="32x32" type="image/x-icon"/>
     <link rel="stylesheet" th:href="@{/generalStyle.css}">
     <link rel="stylesheet" th:href="@{/showUsers.css}">
 
@@ -21,6 +21,7 @@
     <h1 style="color:whitesmoke;">All questions</h1>
     <table>
         <thead>
+        <th>ID</th>
         <th>Question</th>
         <th>Answer A</th>
         <th>Answer B</th>
@@ -31,6 +32,7 @@
         </thead>
         <tbody>
         <tr th:each="question : ${questions}">
+            <td th:text="${question.getId()}"></td>
             <td th:text="${question.getQuestion()}"></td>
             <td th:text="${question.getAnswerA()}"></td>
             <td th:text="${question.getAnswerB()}"></td>

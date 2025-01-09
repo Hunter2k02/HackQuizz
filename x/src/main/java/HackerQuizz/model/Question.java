@@ -3,7 +3,7 @@ package HackerQuizz.model;
 import jakarta.persistence.*;
 
 @Entity
-public class Question {
+public class Question implements Comparable<Question>{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -92,5 +92,14 @@ public class Question {
                 ", answerD='" + answerD + '\'' +
                 ", quiz=" + quiz +
                 '}';
+    }
+    @Override
+    public int compareTo(Question compareQuestion) {
+
+        Long compareId = (compareQuestion).getQuiz().getId();
+
+        return (int)(this.getQuiz().getId() - compareId);
+
+
     }
 }
