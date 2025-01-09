@@ -1,6 +1,6 @@
 
 # HackQuizz
-
+[Live Demo](https://www.filipsanecki.pl/HackQuizz/) <br>
 HackQuizz is a Java Spring Boot application that offers an engaging platform for users to test their knowledge on various topics through interactive quizzes, allowing them to create and manage their own quizzes.
 ## How to use 
 **Note**: The shown database is already populated with sample data.
